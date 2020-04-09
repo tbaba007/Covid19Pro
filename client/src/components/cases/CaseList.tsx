@@ -36,12 +36,11 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
 			fetchAll();
 			return;
 		}
-		list.map((item) => {
+		return list.map((item) => {
 			if (item.country.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
 				response.push(item);
-				setList(response);
-				return;
 			}
+			return setList(response);
 		});
 	};
 
