@@ -1,0 +1,48 @@
+$table-font-size:20;
+$table-header-backgroundcolor:green;
+$table-header-fontcolor:white;
+
+table {
+    width: 100%;
+
+    border: 1;
+    border-width: medium;
+
+    thead {
+        background-color: $table-header-backgroundcolor;
+        color: $table-header-fontcolor;
+        width: 80%;
+        padding: 2em;
+
+
+    }
+
+    tbody {
+        font-size: small;
+        padding: 2em;
+        border: thin;
+    }
+}
+
+div {
+    width: '100%';
+}
+
+body {
+    margin-left: 1%;
+}
+
+search {
+    border-radius: 30px;
+
+}
+
+button {
+
+    background-color: $table-header-backgroundcolor;
+    color: $table-header-fontcolor;
+    border-radius: 5em;
+    width: 30%;
+
+
+}
