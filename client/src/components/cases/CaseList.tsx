@@ -54,7 +54,7 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
 					filterByParam();
 				}}
 				value={search}
-				id="search"
+				id="input"
 			/>
 			<br />
 			<br />

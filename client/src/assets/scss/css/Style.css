@@ -1,20 +1,16 @@
 table {
   width: 100%;
-  border: 1;
-  border-width: medium;
+  border-width: thin;
 }
 
 table thead {
   background-color: green;
   color: white;
-  width: 80%;
-  padding: 2em;
 }
 
 table tbody {
   font-size: small;
   padding: 2em;
-  border: thin;
 }
 
 div {
@@ -25,14 +21,17 @@ body {
   margin-left: 1%;
 }
 
-search {
-  border-radius: 30px;
-}
-
 button {
   background-color: green;
   color: white;
   border-radius: 5em;
   width: 30%;
+}
+
+input {
+  border-radius: 5px;
+  margin-top: 2%;
+  line-height: 2em;
+  width: 30em;
 }
 /*# sourceMappingURL=Style.css.map */

@@ -4,23 +4,17 @@ $table-header-fontcolor:white;
 
 table {
     width: 100%;
-
-    border: 1;
-    border-width: medium;
+    border-width: thin;
 
     thead {
         background-color: $table-header-backgroundcolor;
         color: $table-header-fontcolor;
-        width: 80%;
-        padding: 2em;
-
-
     }
 
     tbody {
         font-size: small;
         padding: 2em;
-        border: thin;
+
     }
 }
 
@@ -32,10 +26,7 @@ body {
     margin-left: 1%;
 }
 
-search {
-    border-radius: 30px;
 
-}
 
 button {
 
@@ -45,4 +36,11 @@ button {
     width: 30%;
 
 
+}
+
+input {
+    border-radius: 5px;
+    margin-top: 2%;
+    line-height: 2em;
+    width: 30em;
 }
