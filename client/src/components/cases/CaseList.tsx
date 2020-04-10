@@ -2,36 +2,24 @@ import React, { useEffect, useState, FunctionComponent } from 'react';
 import * as Api from '../../service/CovidApi';
 import CovidList from './List';
 import '../../assets/scss/css/Style.css';
+import * as CaseModel from '../../models/Case';
 const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
-	interface IList {
-		country: string;
-		cases?: number;
-		todayCases?: number;
-		deaths?: number;
-		todayDeaths?: number;
-		recovered?: number;
-		active?: number;
-		critical?: number;
-		countryInfo: {
-			flag: string;
-		};
-	}
-
-	const [ list, setList ] = useState<IList[]>([]);
+	const [ list, setList ] = useState<CaseModel.IList[]>([]);
 	const [ search, setSearch ] = useState<string>('');
 
 	const fetchAll = async () => {
 		Api.fetchAll().then((response) => {
-			const caseList: IList[] = response;
+			const caseList: CaseModel.IList[] = response;
 			setList(caseList);
 		});
 	};
 	useEffect(() => {
 		fetchAll();
+		window.document.title = 'Covid19 Pro';
 	}, []);
 
 	const filterByParam = () => {
-		let response: IList[] = [];
+		let response: CaseModel.IList[] = [];
 
 		if (search.trim().length === 1) {
 			response.length = 0;

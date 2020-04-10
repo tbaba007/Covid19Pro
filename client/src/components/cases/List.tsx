@@ -1,23 +1,10 @@
 import React, { FunctionComponent } from 'react';
-interface IList {
-	country: string;
-	cases?: number;
-	todayCases?: number;
-	deaths?: number;
-	todayDeaths?: number;
-	recovered?: number;
-	active?: number;
-	critical?: number;
-	countryInfo: {
-		flag: string;
+import * as CaseModel from '../../models/Case';
+
+const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, props) => {
+	const viewDetails = (obj: CaseModel.IList) => {
+		debugger;
 	};
-}
-
-interface IProps {
-	viewDetails: object;
-}
-
-const CovidList: FunctionComponent<{ covid: IList[] }> = ({ covid }, props) => {
 	return (
 		<div id="div">
 			{covid.length > 0 ? (
@@ -29,6 +16,7 @@ const CovidList: FunctionComponent<{ covid: IList[] }> = ({ covid }, props) => {
 							<th>cases</th>
 							<th>deaths</th>
 							<th>recovered</th>
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody id="tbody">
@@ -37,11 +25,16 @@ const CovidList: FunctionComponent<{ covid: IList[] }> = ({ covid }, props) => {
 								<tr key={index}>
 									<td>{index + 1}</td>
 									<td>
-										{item.country} <img src={item.countryInfo.flag} alt="" style={{ width: 10 }} />
+										{item.country} <img src={item.countryInfo.flag} alt="" style={{ width: 20 }} />
 									</td>
 									<td> {item.cases}</td>
 									<td>{item.deaths}</td>
 									<td>{item.recovered}</td>
+									<td>
+										<button id="button" onClick={() => viewDetails(item)}>
+											View
+										</button>
+									</td>
 								</tr>
 							);
 						})}
