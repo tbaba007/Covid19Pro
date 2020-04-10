@@ -12,7 +12,9 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
 		recovered?: number;
 		active?: number;
 		critical?: number;
-		countryInfo: [];
+		countryInfo: {
+			flag: string;
+		};
 	}
 
 	const [ list, setList ] = useState<IList[]>([]);

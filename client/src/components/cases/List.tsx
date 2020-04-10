@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-
 interface IList {
 	country: string;
 	cases?: number;
@@ -9,7 +8,9 @@ interface IList {
 	recovered?: number;
 	active?: number;
 	critical?: number;
-	countryInfo: [];
+	countryInfo: {
+		flag: string;
+	};
 }
 
 interface IProps {
@@ -35,7 +36,9 @@ const CovidList: FunctionComponent<{ covid: IList[] }> = ({ covid }, props) => {
 							return (
 								<tr key={index}>
 									<td>{index + 1}</td>
-									<td>{item.country}</td>
+									<td>
+										{item.country} <img src={item.countryInfo.flag} alt="" style={{ width: 10 }} />
+									</td>
 									<td> {item.cases}</td>
 									<td>{item.deaths}</td>
 									<td>{item.recovered}</td>
