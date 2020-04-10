@@ -13,10 +13,6 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
 			setList(caseList);
 		});
 	};
-	useEffect(() => {
-		fetchAll();
-		window.document.title = 'Covid19 Pro';
-	}, []);
 
 	const filterByParam = () => {
 		let response: CaseModel.IList[] = [];
@@ -33,6 +29,11 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
 			return setList(response);
 		});
 	};
+
+	useEffect(() => {
+		fetchAll();
+		window.document.title = 'Covid19 Pro';
+	}, []);
 
 	return (
 		<div>
