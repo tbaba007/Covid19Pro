@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import * as CaseModel from '../../models/Case';
+//import Details from './Details';
 
 const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, props) => {
-	const viewDetails = (obj: CaseModel.IList) => {
-		debugger;
-	};
+	// const viewDetails = (obj: CaseModel.IList) => {
+	// 	<Details Details={obj}/>
+	// };
 	return (
 		<div id="div">
 			{covid.length > 0 ? (
@@ -31,9 +32,9 @@ const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, p
 									<td>{item.deaths}</td>
 									<td>{item.recovered}</td>
 									<td>
-										<button id="button" onClick={() => viewDetails(item)}>
+										{/* <button id="button" onClick={() => viewDetails(item)}>
 											View
-										</button>
+										</button> */}
 									</td>
 								</tr>
 							);
