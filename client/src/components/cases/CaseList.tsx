@@ -14,19 +14,21 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
 		});
 	};
 
-	const filterByParam = () => {
+	const filterByParam = (searchValue:string) => {
+		
 		let response: CaseModel.IList[] = [];
 
-		if (search.trim().length === 1) {
+		if (searchValue.trim().length === 0) {
 			response.length = 0;
 			fetchAll();
 			return;
 		}
 		list.map((item) => {
-			if (item.country.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+			if (item.country.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
 				response.push(item);
+				return setList(response);
 			}
-			return setList(response);
+			
 		});
 	};
 
@@ -42,7 +44,7 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
 				placeholder="Enter Country"
 				onChange={(e) => {
 					setSearch(e.target.value);
-					filterByParam();
+					filterByParam(e.target.value);
 				}}
 				value={search}
 				id="input"

@@ -14,10 +14,11 @@ const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, p
 						<tr>
 							<th>S/N</th>
 							<th>Country</th>
+							<th>Flag</th>
 							<th>cases</th>
 							<th>deaths</th>
 							<th>recovered</th>
-							<th>Action</th>
+						
 						</tr>
 					</thead>
 					<tbody id="tbody">
@@ -26,7 +27,10 @@ const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, p
 								<tr key={index}>
 									<td>{index + 1}</td>
 									<td>
-										{item.country} <img src={item.countryInfo.flag} alt="" style={{ width: 20 }} />
+										{item.country} 
+									</td>
+									<td>
+									<img src={item.countryInfo.flag} alt="" style={{ width: 20 }} />
 									</td>
 									<td> {item.cases}</td>
 									<td>{item.deaths}</td>

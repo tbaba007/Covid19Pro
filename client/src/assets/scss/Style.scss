@@ -13,7 +13,13 @@ table {
 
 	tbody {
 		font-size: small;
-		padding: 2em;
+		text-align: center;
+		font-weight: bold;
+		:hover{
+			background-color:grey;
+			opacity: initial;
+			color: white;
+		}
 	}
 }
 

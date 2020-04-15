@@ -1,10 +1,10 @@
 export interface IList {
 	country: string;
-	cases?: number;
+	cases: number;
 	todayCases?: number;
-	deaths?: number;
+	deaths: number;
 	todayDeaths?: number;
-	recovered?: number;
+	recovered: number;
 	active?: number;
 	critical?: number;
 	countryInfo: {
