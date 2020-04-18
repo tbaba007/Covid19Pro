@@ -23,7 +23,7 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
 			fetchAll();
 			return;
 		}
-		list.map((item) => {
+		 list.map((item) => {
 			if (item.country.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
 				response.push(item);
 				return setList(response);
@@ -51,7 +51,7 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
 			/>
 			<br />
 			<br />
-			<CovidList covid={list} />
+			<CovidList covid={list}  />
 		</div>
 	);
 };

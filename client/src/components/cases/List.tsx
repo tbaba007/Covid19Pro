@@ -1,14 +1,26 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import * as CaseModel from '../../models/Case';
-//import Details from './Details';
+import Details from './Details';
 
 const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, props) => {
-	// const viewDetails = (obj: CaseModel.IList) => {
-	// 	<Details Details={obj}/>
-	// };
+	const [showDetails,setShowDetails]=useState<boolean>(false)
+	const [obj,setObjDetails]=useState<CaseModel.IList>(Object);
+	const viewDetails = (obj: CaseModel.IList) => {
+		setShowDetails(true);
+		setObjDetails(obj);
+	return	
+	};
+	const closeDetails=()=>{
+		
+		setShowDetails(false);
+	}
 	return (
+		
 		<div id="div">
-			{covid.length > 0 ? (
+
+		{showDetails?<Details details={obj} userdetails={closeDetails} />:null}
+		
+			{covid.length > 0 && !showDetails ? (
 				<table id="table">
 					<thead id="thead">
 						<tr>
@@ -18,7 +30,7 @@ const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, p
 							<th>cases</th>
 							<th>deaths</th>
 							<th>recovered</th>
-						
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody id="tbody">
@@ -36,9 +48,9 @@ const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, p
 									<td>{item.deaths}</td>
 									<td>{item.recovered}</td>
 									<td>
-										{/* <button id="button" onClick={() => viewDetails(item)}>
+										<button id="button" onClick={() => viewDetails(item)}>
 											View
-										</button> */}
+										</button>
 									</td>
 								</tr>
 							);
