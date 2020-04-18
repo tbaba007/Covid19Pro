@@ -26,6 +26,8 @@ const Details:FunctionComponent<{details:CaseModel.IList,userdetails:Function}>=
             <br/>
             <label> <b>Today's Deaths: </b> {model.details.todayDeaths}</label>
             <br/>
+            <label> <b>Tests: </b> {model.details.tests}</label>
+            <br/>
 
             <a href="!#" onClick={()=>{
                return  model.userdetails();

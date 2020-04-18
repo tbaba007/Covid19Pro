@@ -27,9 +27,9 @@ const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, p
 							<th>S/N</th>
 							<th>Country</th>
 							<th>Flag</th>
-							<th>cases</th>
-							<th>deaths</th>
-							<th>recovered</th>
+							<th>Cases</th>
+							<th>Deaths</th>
+							<th>Recovered</th>
 							<th>Action</th>
 						</tr>
 					</thead>

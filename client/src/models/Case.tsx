@@ -7,7 +7,9 @@ export interface IList {
 	recovered: number;
 	active?: number;
 	critical?: number;
+	tests:number;
 	countryInfo: {
 		flag: string;
+
 	};
 }
