@@ -30,7 +30,7 @@ const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, p
 							<th>Cases</th>
 							<th>Deaths</th>
 							<th>Recovered</th>
-							<th>Action</th>
+							
 						</tr>
 					</thead>
 					<tbody id="tbody">
@@ -39,7 +39,10 @@ const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, p
 								<tr key={index}>
 									<td>{index + 1}</td>
 									<td>
-										{item.country} 
+										<a href="!#" onClick={()=>{
+											 viewDetails(item)
+										}}>{item.country}</a>
+										 
 									</td>
 									<td>
 									<img src={item.countryInfo.flag} alt="" style={{ width: 20 }} />
@@ -47,11 +50,7 @@ const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, p
 									<td> {item.cases}</td>
 									<td>{item.deaths}</td>
 									<td>{item.recovered}</td>
-									<td>
-										<button id="button" onClick={() => viewDetails(item)}>
-											View
-										</button>
-									</td>
+									
 								</tr>
 							);
 						})}
