@@ -12,33 +12,6 @@ const Details:FunctionComponent<{details:CaseModel.IList,userdetails:Function}>=
             <br/>
             <img src={model.details.countryInfo.flag} alt=""/>
             <br/>
-            
-{/* 
-            <table>
-                <th>Cases</th>
-                <td>{model.details.cases}</td>
-                <br/>
-                <th>Active Cases</th>
-                <td>{model.details.active}</td>
-                <br/>
-                <th>Critical Cases</th>
-                <td>{model.details.critical}</td>
-                <br/>
-                <th>Death(s)</th>
-                <td>{model.details.deaths}</td>
-                <br/>
-                <th>Recoveries</th>
-                <td>{model.details.recovered}</td>
-                <br/>
-                <th>Today's Cases</th>
-                <td>{model.details.todayCases}</td>
-                <br/>
-                <th>Today's Deaths</th>
-                <td>{model.details.todayDeaths}</td>
-                <br/>
-                <th>Tests</th>
-                <td>{model.details.tests}</td>
-            </table> */}
 
            
                 <li>Cases: {model.details.cases}</li>
