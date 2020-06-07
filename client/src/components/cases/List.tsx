@@ -8,7 +8,7 @@ const CovidList: FunctionComponent<{ covid: CaseModel.IList[] }> = ({ covid }, p
 	const viewDetails = (obj: CaseModel.IList) => {
 		setShowDetails(true);
 		setObjDetails(obj);
-	return	
+	return	false;
 	};
 	const closeDetails=()=>{
 		
