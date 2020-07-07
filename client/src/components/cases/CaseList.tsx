@@ -4,56 +4,76 @@ import CovidList from './List';
 import '../../assets/scss/css/Style.css';
 import * as CaseModel from '../../models/Case';
 const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
-	const [ list, setList ] = useState<CaseModel.IList[]>([]);
-	const [ search, setSearch ] = useState<string>('');
+  const [ list, setList ] = useState<CaseModel.IList[]>([]);
+  const [ search, setSearch ] = useState<string>('');
+  const [totalCases,setTotalCases]=useState<number>(0);
+  
+  const fetchAll = async () => {
+    Api.fetchAll().then((response) => {
+      const caseList: CaseModel.IList[] = response;
+      setList(caseList);
+    });
+    sumTotalCases()
+  };
 
-	const fetchAll = async () => {
-		Api.fetchAll().then((response) => {
-			const caseList: CaseModel.IList[] = response;
-			setList(caseList);
-		});
-	};
+  const filterByParam = (searchValue:string) => {
+    
+    let response: CaseModel.IList[] = [];
 
-	const filterByParam = (searchValue:string) => {
-		
-		let response: CaseModel.IList[] = [];
+    if (searchValue.trim().length === 0) {
+      response.length = 0;
+      fetchAll();
+      return;
+    }
+     list.map((item) => {
 
-		if (searchValue.trim().length === 0) {
-			response.length = 0;
-			fetchAll();
-			return;
-		}
-		 list.map((item) => {
-			if (item.country.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
-				response.push(item);
-				return setList(response);
-			}
-			
-		});
-	};
+      return (
+        item.country.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+        ?
+        (response.push(item))
+        :
+        setList(response)
+      )
+      
+      
+    });
+  };
 
-	useEffect(() => {
-		fetchAll();
-		window.document.title = 'Covid19 Pro';
-	}, []);
+  useEffect(() => {
+    fetchAll();
+    window.document.title = 'Covid19 Pro';
+  });
 
-	return (
-		<div>
-			<input
-				type="text"
-				placeholder="Enter Country"
-				onChange={(e) => {
-					setSearch(e.target.value);
-					filterByParam(e.target.value);
-				}}
-				value={search}
-				id="input"
-			/>
-			<br />
-			<br />
-			<CovidList covid={list}  />
-		</div>
-	);
+  const sumTotalCases=()=>{
+    let sum=0;
+    list.map(item=>{
+      return (
+        sum=sum+item.cases
+      )
+    })
+    
+    setTotalCases(sum);
+  }
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Enter Country"
+        onChange={(e) => {
+          setSearch(e.target.value);
+          filterByParam(e.target.value);
+        }}
+        value={search}
+        id="input"
+      />
+      <br />
+      <label>Total Cases World Wide:<b>{totalCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</b></label>
+      <br />
+      <CovidList covid={list}  />
+    </div>
+  );
 };
 
 export default CaseList;
+
