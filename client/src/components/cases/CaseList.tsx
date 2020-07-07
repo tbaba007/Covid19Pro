@@ -71,6 +71,9 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
       <label>Total Cases World Wide:<b>{totalCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</b></label>
       <br />
       <CovidList covid={list}  />
+	  {list.length<1?
+	  <img src="https://media.giphy.com/media/dBwr79sH0mHt0f7cIB/giphy.gif" alt=""/>
+	  :null}
     </div>
   );
 };
