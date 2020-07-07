@@ -16,10 +16,11 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
     Api.fetchAll().then(response => {
       const caseList: CaseModel.IList[] = response;
       setList(caseList);
+      sumTotalCases(caseList);
+      sumTotalDeaths(caseList);
+      sumTotalRecoveries(caseList);
     });
-    sumTotalCases();
-    sumTotalDeaths();
-    sumTotalRecoveries();
+
   };
 
   const filterByParam = (searchValue: string) => {
@@ -40,30 +41,36 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
   };
 
   useEffect(() => {
+    let mounted=true;
     fetchAll();
     window.document.title = "Covid19 Pro";
-  });
+  
+    return ()=>{
+      mounted=false;
+    }
+  }
+  ,[]);
 
-  const sumTotalCases = () => {
+  const sumTotalCases = (caselist:CaseModel.IList[]) => {
     let sum = 0;
-    list.map(item => {
+    caselist.map(item => {
       return (sum = sum + item.cases);
     });
 
     setTotalCases(sum);
   };
 
-  const sumTotalRecoveries = () => {
+  const sumTotalRecoveries = (caselist:CaseModel.IList[]) => {
     let totalRecoveries = 0;
-    list.map(item => {
+    caselist.map(item => {
       return (totalRecoveries = totalRecoveries + item.recovered);
     });
     setTotalRecoveries(totalRecoveries);
   };
 
-  const sumTotalDeaths = () => {
+  const sumTotalDeaths = (caselist:CaseModel.IList[]) => {
     let totalDeaths = 0;
-    list.map(item => {
+    caselist.map(item => {
       return (totalDeaths = totalDeaths + item.deaths);
     });
     setTotalDeaths(totalDeaths);
