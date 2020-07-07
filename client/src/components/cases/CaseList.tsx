@@ -1,23 +1,28 @@
-import React, { useEffect, useState, FunctionComponent } from 'react';
-import * as Api from '../../service/CovidApi';
-import CovidList from './List';
-import '../../assets/scss/css/Style.css';
-import * as CaseModel from '../../models/Case';
+
+
+import React, { useEffect, useState, FunctionComponent } from "react";
+import * as Api from "../../service/CovidApi";
+import CovidList from "./List";
+import "../../assets/scss/css/Style.css";
+import * as CaseModel from "../../models/Case";
 const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
-  const [ list, setList ] = useState<CaseModel.IList[]>([]);
-  const [ search, setSearch ] = useState<string>('');
-  const [totalCases,setTotalCases]=useState<number>(0);
-  
+  const [list, setList] = useState<CaseModel.IList[]>([]);
+  const [search, setSearch] = useState<string>("");
+  const [totalCases, setTotalCases] = useState<number>(0);
+  const [totalRecoveries, setTotalRecoveries] = useState<number>(0);
+  const [totalDeaths, setTotalDeaths] = useState<number>(0);
+
   const fetchAll = async () => {
-    Api.fetchAll().then((response) => {
+    Api.fetchAll().then(response => {
       const caseList: CaseModel.IList[] = response;
       setList(caseList);
     });
-    sumTotalCases()
+    sumTotalCases();
+    sumTotalDeaths();
+    sumTotalRecoveries();
   };
 
-  const filterByParam = (searchValue:string) => {
-    
+  const filterByParam = (searchValue: string) => {
     let response: CaseModel.IList[] = [];
 
     if (searchValue.trim().length === 0) {
@@ -25,42 +30,51 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
       fetchAll();
       return;
     }
-     list.map((item) => {
-
-      return (
-        item.country.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
-        ?
-        (response.push(item))
-        :
-        setList(response)
-      )
-      
-      
+    list.map(item => {
+      return item.country
+        .toLocaleLowerCase()
+        .includes(searchValue.toLocaleLowerCase())
+        ? response.push(item)
+        : setList(response);
     });
   };
 
   useEffect(() => {
     fetchAll();
-    window.document.title = 'Covid19 Pro';
+    window.document.title = "Covid19 Pro";
   });
 
-  const sumTotalCases=()=>{
-    let sum=0;
-    list.map(item=>{
-      return (
-        sum=sum+item.cases
-      )
-    })
-    
+  const sumTotalCases = () => {
+    let sum = 0;
+    list.map(item => {
+      return (sum = sum + item.cases);
+    });
+
     setTotalCases(sum);
-  }
+  };
+
+  const sumTotalRecoveries = () => {
+    let totalRecoveries = 0;
+    list.map(item => {
+      return (totalRecoveries = totalRecoveries + item.recovered);
+    });
+    setTotalRecoveries(totalRecoveries);
+  };
+
+  const sumTotalDeaths = () => {
+    let totalDeaths = 0;
+    list.map(item => {
+      return (totalDeaths = totalDeaths + item.deaths);
+    });
+    setTotalDeaths(totalDeaths);
+  };
 
   return (
     <div>
       <input
         type="text"
         placeholder="Enter Country"
-        onChange={(e) => {
+        onChange={e => {
           setSearch(e.target.value);
           filterByParam(e.target.value);
         }}
@@ -68,15 +82,26 @@ const CaseList: FunctionComponent<{ DiagnosisList: [] }> = () => {
         id="input"
       />
       <br />
-      <label>Total Cases World Wide:<b>{totalCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</b></label>
+      <label>
+        Total Cases World Wide:
+        <b>{totalCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</b>
+      </label>
       <br />
-      <CovidList covid={list}  />
-	  {list.length<1?
-	  <img src="https://media.giphy.com/media/dBwr79sH0mHt0f7cIB/giphy.gif" alt=""/>
-	  :null}
+      <label>
+        Total Recoveries World Wide:
+        <b>
+          {totalRecoveries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        </b>
+      </label>
+      <br />
+      <label>
+        Total Death(s) World Wide:
+        <b>{totalDeaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</b>
+      </label>
+      <br />
+      <CovidList covid={list} />
     </div>
   );
 };
 
 export default CaseList;
-
